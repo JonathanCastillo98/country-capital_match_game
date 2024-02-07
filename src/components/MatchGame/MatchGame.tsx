@@ -17,7 +17,7 @@ const MatchGame = ({ data }: Props) => {
 
     // Hooks
     const { shuffled }: TUseShuffleArrayReturn = useShuffleArray(mixArr);
-    const { win, lose, handleClick, matchedButtons, clickedButtons, errorsAmount }: TUseVerifyButtonsReturn = useVerifyButtons(mixArr, parsedData)
+    const { win, lose, handleClick, matchedButtons, clickedButtons, errorsAmount, errors }: TUseVerifyButtonsReturn = useVerifyButtons(mixArr, parsedData)
 
 
     return (
@@ -35,12 +35,11 @@ const MatchGame = ({ data }: Props) => {
                                     key={index}
                                     onClick={() => handleClick(value)}
                                     style={{
-                                        backgroundColor: matchedButtons.includes(value) ? "green" : clickedButtons.includes(value) ? "blue" : "white",
-                                        color: matchedButtons.includes(value) ? "white" : clickedButtons.includes(value) ? "white" : "black",
-                                        borderColor: matchedButtons.includes(value) ? "black" : clickedButtons.includes(value) ? "blue" : "black",
+                                        backgroundColor: matchedButtons.includes(value) ? "green" : clickedButtons.includes(value) ? "blue" : errors.includes(value) ? "red" : "white",
+                                        color: matchedButtons.includes(value) ? "white" : clickedButtons.includes(value) ? "white" : errors.includes(value) ? "white" : "black",
+                                        borderColor: matchedButtons.includes(value) ? "black" : clickedButtons.includes(value) ? "blue" : errors.includes(value) ? "red" : "black",
                                         cursor: matchedButtons.includes(value) ? "not-allowed" : "pointer",
                                         outline: "none",
-
                                     }}
                                     disabled={matchedButtons.includes(value)}
                                     className='btn'

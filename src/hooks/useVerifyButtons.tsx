@@ -9,6 +9,7 @@ const useVerifyButtons = (array: string[], data: IData) => {
     const [matchedButtons, setMatchedButtons] = useState<string[]>([]);
     const [win, setWin] = useState<boolean>(false);
     const [errorsAmount, setErrorsAmount] = useState<number>(0);
+    const [errors, setErrors] = useState<string[]>([]);
     const [lose, setLose] = useState<boolean>(false);
 
     // UseEffects
@@ -21,6 +22,7 @@ const useVerifyButtons = (array: string[], data: IData) => {
 
     // Handler to add the clicked buttons to the array
     const handleClick = (value: string) => {
+        setErrors([]);
         if (clickedButtons.length === 2 || matchedButtons.includes(value)) return;
         setClickedButtons(prevState => [...prevState, value]);
     };
@@ -45,13 +47,14 @@ const useVerifyButtons = (array: string[], data: IData) => {
             setMatchedButtons(prevState => [...prevState, firstButton, secondButton]);
         } else {
             if (errorsAmount === 2) setLose(true)
+            setErrors(prevState => [...prevState, firstButton, secondButton]);
             setErrorsAmount(prev => prev + 1);
         }
 
         setClickedButtons([]);
     }
 
-    return { win, lose, handleClick, matchedButtons, clickedButtons, errorsAmount }
+    return { win, lose, handleClick, matchedButtons, clickedButtons, errorsAmount, errors }
 }
 
 export default useVerifyButtons;

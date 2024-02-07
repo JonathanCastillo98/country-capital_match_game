@@ -9,6 +9,7 @@ export type TUseVerifyButtonsReturn = {
     matchedButtons: string[];
     clickedButtons: string[];
     errorsAmount: number;
+    errors: string[];
 };
 
 export type TUseShuffleArrayReturn = {
